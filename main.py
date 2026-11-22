@@ -16,6 +16,10 @@ TEXT = (
 
 
 def main() -> None:
+    # Self-check against the competition gate: 1-280 Unicode code points,
+    # not only white space. Fail loudly here rather than ship an invalid entry.
+    if not 1 <= len(TEXT) <= 280 or not TEXT.strip():
+        raise ValueError("entry text must be 1-280 characters, not blank")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(TEXT)
